@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-11-08 15:44:06.790144",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "select_type",
+  "attach_csv",
+  "convert_and_download_xml"
+ ],
+ "fields": [
+  {
+   "fieldname": "attach_csv",
+   "fieldtype": "Attach",
+   "label": "Attach CSV"
+  },
+  {
+   "fieldname": "convert_and_download_xml",
+   "fieldtype": "Button",
+   "label": "Convert and Download XML"
+  },
+  {
+   "fieldname": "select_type",
+   "fieldtype": "Select",
+   "label": "Select Type",
+   "options": "Customer\nSupplier\nSales Order\nPurchase Order\nJournal Entry\nPayment Entry\nItem Master\nChart of Accounts"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-11-09 13:40:38.632799",
+ "modified_by": "Administrator",
+ "module": "Tallyerp9 Import",
+ "name": "Tally ERP9 Import Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
