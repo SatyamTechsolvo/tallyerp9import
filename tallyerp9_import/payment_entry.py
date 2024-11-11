@@ -81,8 +81,8 @@ def convert_csv_to_xml(doctype, docname, csv_file):
         # Create VOUCHER element for payment entry
         voucher = ET.SubElement(request_data, "TALLYMESSAGE", xmlns_UDF="TallyUDF")
         voucher_element = ET.SubElement(voucher, "VOUCHER", {
-            "REMOTEID": f"{guid}-00000029",
-            "VCHKEY": f"{guid}-0000b147:00000020",
+            "REMOTEID": f"{guid}-000000bf",
+            "VCHKEY": f"{guid}-0000b146:00000088",
             "VCHTYPE": "Payment",
             "ACTION": "Create",
             "OBJVIEW": "Accounting Voucher View"
@@ -90,14 +90,14 @@ def convert_csv_to_xml(doctype, docname, csv_file):
 
         # Add OLDAUDITENTRYIDS.LIST
         old_audit_entry_ids = ET.SubElement(voucher_element, "OLDAUDITENTRYIDS.LIST", TYPE="Number")
-        ET.SubElement(old_audit_entry_ids, "OLDAUDITENTRYIDS").text = str(row.get('old_audit_entry_id', '-1'))
+        ET.SubElement(old_audit_entry_ids, "OLDAUDITENTRYIDS").text = "-1"
 
         # Add DATE and GUID
         ET.SubElement(voucher_element, "DATE").text = formatted_date
         ET.SubElement(voucher_element, "GUID").text = guid
-
+        
         # Add PARTYLEDGERNAME
-        ET.SubElement(voucher_element, "PARTYLEDGERNAME").text = party_name
+        ET.SubElement(voucher_element, "PARTYLEDGERNAME").text = "Cash"
 
         # Add VOUCHERTYPENAME and other elements specific to Payment entry
         ET.SubElement(voucher_element, "VOUCHERTYPENAME").text = "Payment"
@@ -105,26 +105,116 @@ def convert_csv_to_xml(doctype, docname, csv_file):
         ET.SubElement(voucher_element, "FBTPAYMENTTYPE").text = "Default"
         ET.SubElement(voucher_element, "PERSISTEDVIEW").text = "Accounting Voucher View"
 
-        # Add amount to main voucher
-        ET.SubElement(voucher_element, "AMOUNT").text = amount
-        ET.SubElement(voucher_element, "LEDGERNAME").text = party_name
+        # Add additional fields as per the provided XML structure
+        ET.SubElement(voucher_element, "CSTFORMISSUETYPE").text = ""
+        ET.SubElement(voucher_element, "CSTFORMRECVTYPE").text = ""
+        ET.SubElement(voucher_element, "VCHGSTCLASS").text = ""
+        ET.SubElement(voucher_element, "DIFFACTUALQTY").text = "No"
+        ET.SubElement(voucher_element, "ISMSTFROMSYNC").text = "No"
+        ET.SubElement(voucher_element, "ASORIGINAL").text = "No"
+        ET.SubElement(voucher_element, "AUDITED").text = "No"
+        ET.SubElement(voucher_element, "FORJOBCOSTING").text = "No"
+        ET.SubElement(voucher_element, "ISOPTIONAL").text = "No"
+        ET.SubElement(voucher_element, "EFFECTIVEDATE").text = formatted_date
+        ET.SubElement(voucher_element, "USEFOREXCISE").text = "No"
+        ET.SubElement(voucher_element, "ISFORJOBWORKIN").text = "No"
+        ET.SubElement(voucher_element, "ALLOWCONSUMPTION").text = "No"
+        ET.SubElement(voucher_element, "USEFORINTEREST").text = "No"
+        ET.SubElement(voucher_element, "USEFORGAINLOSS").text = "No"
+        ET.SubElement(voucher_element, "USEFORGODOWNTRANSFER").text = "No"
+        ET.SubElement(voucher_element, "USEFORCOMPOUND").text = "No"
+        ET.SubElement(voucher_element, "USEFORSERVICETAX").text = "No"
+        ET.SubElement(voucher_element, "ISDELETED").text = "No"
+        ET.SubElement(voucher_element, "ISONHOLD").text = "No"
+        ET.SubElement(voucher_element, "ISBOENOTAPPLICABLE").text = "No"
+        ET.SubElement(voucher_element, "ISEXCISEVOUCHER").text = "No"
+        ET.SubElement(voucher_element, "EXCISETAXOVERRIDE").text = "No"
+        ET.SubElement(voucher_element, "USEFORTAXUNITTRANSFER").text = "No"
+        ET.SubElement(voucher_element, "IGNOREPOSVALIDATION").text = "No"
+        ET.SubElement(voucher_element, "EXCISEOPENING").text = "No"
+        ET.SubElement(voucher_element, "USEFORFINALPRODUCTION").text = "No"
+        ET.SubElement(voucher_element, "ISTDSOVERRIDDEN").text = "No"
+        ET.SubElement(voucher_element, "ISTCSOVERRIDDEN").text = "No"
+        ET.SubElement(voucher_element, "ISTDSTCSCASHVCH").text = "No"
+        ET.SubElement(voucher_element, "INCLUDEADVPYMTVCH").text = "No"
+        ET.SubElement(voucher_element, "ISSUBWORKSCONTRACT").text = "No"
+        ET.SubElement(voucher_element, "ISVATOVERRIDDEN").text = "No"
+        ET.SubElement(voucher_element, "IGNOREORIGVCHDATE").text = "No"
+        ET.SubElement(voucher_element, "ISVATPAIDATCUSTOMS").text = "No"
+        ET.SubElement(voucher_element, "ISDECLAREDTOCUSTOMS").text = "No"
+        ET.SubElement(voucher_element, "ISSERVICETAXOVERRIDDEN").text = "No"
+        ET.SubElement(voucher_element, "ISISDVOUCHER").text = "No"
+        ET.SubElement(voucher_element, "ISEXCISEOVERRIDDEN").text = "No"
+        ET.SubElement(voucher_element, "ISEXCISESUPPLYVCH").text = "No"
+        ET.SubElement(voucher_element, "ISGSTOVERRIDDEN").text = "No"
+        ET.SubElement(voucher_element, "GSTNOTEXPORTED").text = "No"
+        ET.SubElement(voucher_element, "IGNOREGSTINVALIDATION").text = "No"
+        ET.SubElement(voucher_element, "ISGSTREFUND").text = "No"
+        ET.SubElement(voucher_element, "ISGSTSECSEVENAPPLICABLE").text = "No"
+        ET.SubElement(voucher_element, "ISVATPRINCIPALACCOUNT").text = "No"
+        ET.SubElement(voucher_element, "ISSHIPPINGWITHINSTATE").text = "No"
+        ET.SubElement(voucher_element, "ISOVERSEASTOURISTTRANS").text = "No"
+        ET.SubElement(voucher_element, "ISDESIGNATEDZONEPARTY").text = "No"
+        ET.SubElement(voucher_element, "ISCANCELLED").text = "No"
+        ET.SubElement(voucher_element, "HASCASHFLOW").text = "Yes"
+        ET.SubElement(voucher_element, "ISPOSTDATED").text = "No"
+        ET.SubElement(voucher_element, "USETRACKINGNUMBER").text = "No"
+        ET.SubElement(voucher_element, "ISINVOICE").text = "No"
+        ET.SubElement(voucher_element, "MFGJOURNAL").text = "No"
+        ET.SubElement(voucher_element, "HASDISCOUNTS").text = "No"
+        ET.SubElement(voucher_element, "ASPAYSLIP").text = "No"
+        ET.SubElement(voucher_element, "ISCOSTCENTRE").text = "No"
+        ET.SubElement(voucher_element, "ISSTXNONREALIZEDVCH").text = "No"
+        ET.SubElement(voucher_element, "ISEXCISEMANUFACTURERON").text = "No"
+        ET.SubElement(voucher_element, "ISBLANKCHEQUE").text = "No"
+        ET.SubElement(voucher_element, "ISVOID").text = "No"
+        ET.SubElement(voucher_element, "ORDERLINESTATUS").text = "No"
+        ET.SubElement(voucher_element, "VATISAGNSTCANCSALES").text = "No"
+        ET.SubElement(voucher_element, "VATISPURCEXEMPTED").text = "No"
+        ET.SubElement(voucher_element, "ISVATRESTAXINVOICE").text = "No"
+        ET.SubElement(voucher_element, "VATISASSESABLECALCVCH").text = "No"
+        ET.SubElement(voucher_element, "ISVATDUTYPAID").text = "Yes"
+        ET.SubElement(voucher_element, "ISDELIVERYSAMEASCONSIGNEE").text = "No"
+        ET.SubElement(voucher_element, "ISDISPATCHSAMEASCONSIGNOR").text = "No"
+        ET.SubElement(voucher_element, "CHANGEVCHMODE").text = "No"
+        ET.SubElement(voucher_element, "ALTERID").text = "519"
+        ET.SubElement(voucher_element, "MASTERID").text = "191"
+        ET.SubElement(voucher_element, "VOUCHERKEY").text = str(uuid.uuid4())  # Unique key for each voucher
 
         # Create ALLLEDGERENTRIES.LIST for debit and credit entries
         all_ledger_entries = ET.SubElement(voucher_element, "ALLLEDGERENTRIES.LIST")
-        
+
         # Add debit entry (for party)
         debit_entry = ET.SubElement(all_ledger_entries, "ALLLEDGERENTRIES.LIST")
+        ET.SubElement(debit_entry, "OLDAUDITENTRYIDS.LIST", TYPE="Number")
+        ET.SubElement(debit_entry, "OLDAUDITENTRYIDS").text = "-1"
         ET.SubElement(debit_entry, "LEDGERNAME").text = party_name
+        ET.SubElement(debit_entry, "GSTCLASS").text = ""
         ET.SubElement(debit_entry, "ISDEEMEDPOSITIVE").text = "Yes"
+        ET.SubElement(debit_entry, "LEDGERFROMITEM").text = "No"
+        ET.SubElement(debit_entry, "REMOVEZEROENTRIES").text = "No"
+        ET.SubElement(debit_entry, "ISPARTYLEDGER").text = "No"
+        ET.SubElement(debit_entry, "ISLASTDEEMEDPOSITIVE").text = "Yes"
+        ET.SubElement(debit_entry, "ISCAPVATTAXALTERED").text = "No"
+        ET.SubElement(debit_entry, "ISCAPVATNOTCLAIMED").text = "No"
         ET.SubElement(debit_entry, "AMOUNT").text = f"-{amount}"
 
-        # Add credit entry (for bank or cash ledger)
+        # Add credit entry (for Cash)
         credit_entry = ET.SubElement(all_ledger_entries, "ALLLEDGERENTRIES.LIST")
-        bank_ledger = saxutils.escape(str(row.get('paid_to', '')))
-        ET.SubElement(credit_entry, "LEDGERNAME").text = bank_ledger
+        ET.SubElement(credit_entry, "OLDAUDITENTRYIDS.LIST", TYPE="Number")
+        ET.SubElement(credit_entry, "OLDAUDITENTRYIDS").text = "-1"
+        ET.SubElement(credit_entry, "LEDGERNAME").text = "Cash"
+        ET.SubElement(credit_entry, "GSTCLASS").text = ""
         ET.SubElement(credit_entry, "ISDEEMEDPOSITIVE").text = "No"
+        ET.SubElement(credit_entry, "LEDGERFROMITEM").text = "No"
+        ET.SubElement(credit_entry, "REMOVEZEROENTRIES").text = "No"
+        ET.SubElement(credit_entry, "ISPARTYLEDGER").text = "Yes"
+        ET.SubElement(credit_entry, "ISLASTDEEMEDPOSITIVE").text = "No"
+        ET.SubElement(credit_entry, "ISCAPVATTAXALTERED").text = "No"
+        ET.SubElement(credit_entry, "ISCAPVATNOTCLAIMED").text = "No"
         ET.SubElement(credit_entry, "AMOUNT").text = amount
 
+    # Convert to XML string
     xml_str = ET.tostring(envelope, encoding='utf-8')
     parsed_xml = minidom.parseString(xml_str)
     pretty_xml_as_string = parsed_xml.toprettyxml(indent="  ")
