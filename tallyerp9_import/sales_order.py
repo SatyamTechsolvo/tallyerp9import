@@ -32,7 +32,7 @@ def convert_csv_to_xml(doctype, docname, csv_file):
         frappe.log_error(f"File Retrieval Error: {str(file_error)}")
         frappe.throw(f"Error retrieving CSV file: {str(file_error)}")
 
-    df = pd.read_csv(file_path, skiprows=[*range(0, 15), 16, 17, 18, 19, 20], encoding='utf-8')
+    df = pd.read_csv(file_path, skiprows=[*range(0, 15), 16, 17, 18, 19], encoding='utf-8')
     df.columns = df.columns.str.strip()
     df = df.fillna("")
     
